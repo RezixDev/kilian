@@ -2,6 +2,7 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Herzlichen Glückwunsch zum Geburtstag!</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
     <style>
@@ -18,31 +19,35 @@
         }
 
         .container {
+            width: 95%;
             max-width: 800px;
-            padding: 2rem;
-            margin-top: 2rem;
+            padding: 1rem;
+            margin-top: 1rem;
             background: rgba(255, 255, 255, 0.9);
             border-radius: 20px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         h1 {
-            font-size: 3rem;
+            font-size: clamp(1.8rem, 5vw, 3rem);
             color: #ff4b6e;
             margin-bottom: 1rem;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            word-wrap: break-word;
         }
 
         .birthday-message {
-            font-size: 1.5rem;
-            margin: 2rem 0;
+            font-size: clamp(1.1rem, 4vw, 1.5rem);
+            margin: 1.5rem 0;
             line-height: 1.6;
+            padding: 0 1rem;
         }
 
         .photo-container {
+            width: 90%;
             max-width: 400px;
-            height: 300px;
-            margin: 2rem auto;
+            height: 250px;
+            margin: 1.5rem auto;
             border: 3px solid #ff4b6e;
             border-radius: 10px;
             overflow: hidden;
@@ -56,66 +61,71 @@
 
         .music-controls {
             margin: 1rem 0;
-            padding: 1rem;
+            padding: 0.8rem;
             background: rgba(255, 255, 255, 0.8);
             border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
         }
 
         button {
             background: #ff4b6e;
             color: white;
             border: none;
-            padding: 1rem 2rem;
-            font-size: 1.2rem;
+            padding: 1rem;
+            font-size: 1.1rem;
             border-radius: 30px;
             cursor: pointer;
             transition: transform 0.2s;
-            margin: 0.5rem;
+            margin: 0.25rem;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
         }
 
-        button:hover {
-            transform: scale(1.05);
+        button:active {
+            transform: scale(0.95);
         }
 
         .name-variations {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 10px;
-            padding: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 8px;
+            padding: 15px;
             background: white;
             border-radius: 10px;
-            margin-top: 2rem;
+            margin-top: 1.5rem;
             text-align: left;
+            font-size: 0.9rem;
         }
 
         .name-variations div {
             padding: 5px;
+            overflow-wrap: break-word;
         }
 
         .name-link {
             color: #ff4b6e;
             text-decoration: none;
-        }
-
-        .name-link:hover {
-            text-decoration: underline;
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
         }
 
         .nav-menu {
             background: rgba(255, 255, 255, 0.95);
-            padding: 1rem;
+            padding: 0.8rem;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             position: sticky;
             top: 0;
             z-index: 1000;
+            width: 100%;
         }
 
         .nav-container {
-            max-width: 800px;
-            margin: 0 auto;
             display: flex;
             justify-content: center;
-            gap: 2rem;
+            gap: 1rem;
+            flex-wrap: wrap;
         }
 
         .nav-link {
@@ -124,12 +134,13 @@
             padding: 0.5rem 1rem;
             border-radius: 20px;
             transition: all 0.3s ease;
+            font-size: 0.9rem;
+            white-space: nowrap;
         }
 
-        .nav-link:hover {
+        .nav-link:active {
             background: #ff4b6e;
             color: white;
-            transform: translateY(-2px);
         }
 
         .nav-link.active {
@@ -137,11 +148,19 @@
             color: white;
         }
 
-        /* Container für den Hauptinhalt */
-        .content {
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 0 1rem;
+        @media (max-width: 480px) {
+            .container {
+                padding: 0.8rem;
+            }
+            
+            .music-controls button {
+                width: 100%;
+            }
+            
+            .name-variations {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                font-size: 0.8rem;
+            }
         }
     </style>
 </head>
@@ -155,7 +174,7 @@
     <div class="container">
         <h1>🎉 Alles Gute zum Geburtstag <a href="#variations" class="name-link">Killian</a>! 🎂</h1>
         <div class="music-controls">
-            <button onclick="playBirthdaySong()">🎵 Musik Abspielen</button>
+            <button id="playButton" onclick="handlePlay()">🎵 Musik Abspielen</button>
             <button onclick="stopBirthdaySong()">⏹️ Stop</button>
         </div>
         <div class="birthday-message">
@@ -168,7 +187,7 @@
         </div>
 
         <div class="photo-container">
-            <img src="hi.png"Geburtstagsfoto">
+            <img src="hi.png" alt="Geburtstagsfoto">
         </div>
 
         <div id="variations" class="name-variations">
@@ -369,6 +388,10 @@
     </div>
 
     <script>
+        let audioContext;
+        let isPlaying = false;
+        let currentNoteIndex = 0;
+
         const notes = [
             'C4', 'C4', 'D4', 'C4', 'F4', 'E4',
             'C4', 'C4', 'D4', 'C4', 'G4', 'F4',
@@ -382,6 +405,24 @@
             '8n', '8n', '4n', '4n', '4n', '4n', '4n',
             '8n', '8n', '4n', '4n', '4n', '2n'
         ];
+
+        async function initAudio() {
+            audioContext = await Tone.start();
+            return audioContext;
+        }
+
+        async function handlePlay() {
+            // Initialisiere Audio beim ersten Klick
+            if (!audioContext) {
+                try {
+                    await initAudio();
+                } catch (error) {
+                    console.error('Audio konnte nicht initialisiert werden:', error);
+                    return;
+                }
+            }
+            playBirthdaySong();
+        }
 
         const synth = new Tone.Synth({
             oscillator: { type: 'sine' },
@@ -400,48 +441,45 @@
 
         synth.connect(reverb);
 
-let isPlaying = false;
-let currentNoteIndex = 0;
-let nextNoteTime = 0;
+        async function playBirthdaySong() {
+            if (isPlaying) return;
+            
+            try {
+                isPlaying = true;
+                currentNoteIndex = 0;
+                
+                function scheduleNote() {
+                    if (!isPlaying) return;
+                    if (currentNoteIndex >= notes.length) {
+                        isPlaying = false;
+                        return;
+                    }
 
-async function playBirthdaySong() {
-    if (isPlaying) return;
-    
-    await Tone.start();
-    isPlaying = true;
-    currentNoteIndex = 0;
-    
-    Tone.Transport.start();
-    
-    function scheduleNote() {
-        if (!isPlaying) return;
-        if (currentNoteIndex >= notes.length) {
+                    const note = notes[currentNoteIndex];
+                    const duration = durations[currentNoteIndex];
+                    
+                    synth.triggerAttackRelease(note, duration);
+                    
+                    currentNoteIndex++;
+                    if (currentNoteIndex < notes.length) {
+                        setTimeout(scheduleNote, Tone.Time(duration).toMilliseconds() * 1.1);
+                    }
+                }
+
+                scheduleNote();
+            } catch (error) {
+                console.error('Fehler beim Abspielen:', error);
+                isPlaying = false;
+            }
+        }
+
+        function stopBirthdaySong() {
             isPlaying = false;
-            Tone.Transport.stop();
-            return;
+            synth.triggerRelease();
         }
 
-        const note = notes[currentNoteIndex];
-        const duration = durations[currentNoteIndex];
-        
-        synth.triggerAttackRelease(note, duration);
-        
-        currentNoteIndex++;
-        if (currentNoteIndex < notes.length) {
-            setTimeout(scheduleNote, Tone.Time(duration).toMilliseconds() * 1.1);
-        }
-    }
-
-    scheduleNote();
-}
-
-function stopBirthdaySong() {
-    isPlaying = false;
-    Tone.Transport.stop();
-    synth.triggerRelease();
-}
-
-document.addEventListener('DOMContentLoaded', () => {
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', () => {
             const currentPage = window.location.pathname;
             const navLinks = document.querySelectorAll('.nav-link');
             
@@ -452,15 +490,14 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-// Smooth scrolling für den Namen-Link
-document.querySelector('.name-link').addEventListener('click', function(e) {
-    e.preventDefault();
-    const targetId = this.getAttribute('href').slice(1);
-    document.getElementById(targetId).scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-    });
-});
-</script>
+        document.querySelector('.name-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').slice(1);
+            document.getElementById(targetId).scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        });
+    </script>
 </body>
 </html>
