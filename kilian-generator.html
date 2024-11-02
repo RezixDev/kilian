@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Killian Namen Generator</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #ff4b6e;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        button {
+            background: #ff4b6e;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        input[type="number"] {
+            width: 80px;
+            padding: 0.5rem;
+            border: 2px solid #ff4b6e;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .output {
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            border: 2px solid #ff4b6e;
+            margin-top: 1rem;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .name-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+            padding: 10px;
+        }
+
+        .name-item {
+            padding: 8px;
+            background: #f8f8f8;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .name-item:hover {
+            background: #ffe6e9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎲 Killian Namen Generator</h1>
+        
+        <div class="controls">
+            <input type="number" id="nameCount" value="10" min="1" max="100">
+            <button onclick="generateThematicNames()">Thematische Namen</button>
+            <button onclick="generateRandomNames()">Zufällige Namen</button>
+        </div>
+
+        <div class="output">
+            <div id="nameList" class="name-list">
+                <!-- Hier werden die generierten Namen angezeigt -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class KillianNameGenerator {
+            constructor() {
+                this.germanFood = [
+        'Bratwurst', 'Currywurst', 'Döner', 'Schnitzel', 'Sauerkraut', 
+        'Brezel', 'Knödel', 'Spätzle', 'Maultasche', 'Leberkäs',
+        'Weißwurst', 'Leberwurst', 'Blutwurst', 'Mettwurst', 'Bockwurst',
+        'Kartoffel', 'Semmel', 'Bretzel', 'Gugelhupf', 'Strudel',
+        'Kaiserschmarrn', 'Dampfnudel', 'Reiberdatschi', 'Labskaus', 'Grünkohl',
+        'Eintopf', 'Rouladen', 'Sauerbraten', 'Kassler', 'Hackbraten',
+        'Marzipan', 'Lebkuchen', 'Pumpernickel', 'Krapfen', 'Berliner',
+        'Frikadelle', 'Kasseler', 'Käsekuchen', 'Pfannkuchen', 'Schweinebraten',
+        'Spargel', 'Sülze', 'Tafelspitz', 'Wienerschnitzel', 'Germknödel',
+        'Eierkuchen', 'Quarkkeulchen', 'Dibbelabbes', 'Handkäs', 'Zwiebelkuchen'
+    ];
+    
+    this.germanDrinks = [
+        'Bier', 'Weißbier', 'Radler', 'Schorle', 'Glühwein',
+        'Apfelwein', 'Weinschorle', 'Spezi', 'Kölsch', 'Pils',
+        'Altbier', 'Hefeweizen', 'Dunkel', 'Maibock', 'Märzen',
+        'Kristallweizen', 'Berliner Weiße', 'Gose', 'Export', 'Schwarzbier',
+        'Doppelbock', 'Eisbock', 'Rauchbier', 'Kellerbier', 'Zwickel',
+        'Kirschsaft', 'Johannisbeerschorle', 'Malzbier', 'Fassbrause', 'Alster',
+        'Federweißer', 'Riesling', 'Spätburgunder', 'Dornfelder', 'Müller-Thurgau',
+        'Schnaps', 'Korn', 'Obstler', 'Jägermeister', 'Underberg',
+        'Kräuterlikör', 'Berliner Luft', 'Kirschwasser', 'Williams', 'Himbeergeist',
+        'Holunderlikör', 'Saftsecco', 'Bowle', 'Punsch', 'Rumtopf'
+    ];
+    
+    this.nature = [
+        'Berg', 'Tal', 'Wald', 'Wiese', 'See', 'Bach', 'Fluss', 'Gipfel',
+        'Moor', 'Heide', 'Düne', 'Strand', 'Klippe', 'Fjord', 'Gletscher',
+        'Höhle', 'Schlucht', 'Vulkan', 'Steppe', 'Tundra',
+        'Watt', 'Riff', 'Delta', 'Lagune', 'Bucht',
+        'Quelle', 'Wasserfall', 'Stromschnelle', 'Sandbank', 'Insel',
+        'Gebirge', 'Hügel', 'Plateau', 'Ebene', 'Tief',
+        'Fjäll', 'Alm', 'Aue', 'Marsch', 'Geest',
+        'Förde', 'Bodden', 'Haff', 'Sund', 'Becken',
+        'Trog', 'Kar', 'Grat', 'Kamm', 'Hang'
+    ];
+    
+    this.consonants = 'bcdfghjklmnpqrstvwxz'.split('');
+    this.vowels = 'aeiou'.split('');
+    
+    this.prefixes = [
+        'Tr', 'Br', 'Cr', 'Dr', 'Fr', 'Gr', 'Pr', 'Str', 'Spr', 'Schr',
+        'Bl', 'Cl', 'Fl', 'Gl', 'Kl', 'Pl', 'Sl', 'Thr', 'Schl', 'Schw',
+        'Zw', 'Qu', 'Pf', 'Kr', 'Kn', 'Gn', 'Sk', 'Sm', 'Sn', 'Sp',
+        'St', 'Sw', 'Tr', 'Tw', 'Wr', 'Wh', 'Ph', 'Th', 'Ch', 'Rh',
+        'Schn', 'Schm', 'Schw', 'Pfl', 'Spl', 'Spr', 'Str', 'Skr', 'Sph', 'Zw'
+    ];
+            }
+
+            generateThematicName() {
+                const allThemes = [...this.germanFood, ...this.germanDrinks, ...this.nature];
+                const randomTheme = allThemes[Math.floor(Math.random() * allThemes.length)];
+                return randomTheme + 'illian';
+            }
+
+            generateRandomName() {
+                const length = Math.floor(Math.random() * 2) + 1;
+                let name = '';
+                
+                const prefix = this.prefixes[Math.floor(Math.random() * this.prefixes.length)];
+                name = prefix;
+                
+                for (let i = 0; i < length; i++) {
+                    const vowel = this.vowels[Math.floor(Math.random() * this.vowels.length)];
+                    name += vowel;
+                    
+                    if (Math.random() > 0.5) {
+                        const consonant = this.consonants[Math.floor(Math.random() * this.consonants.length)];
+                        name += consonant;
+                    }
+                }
+                
+                return name + 'illian';
+            }
+
+            generateMultipleNames(count, thematic = false) {
+                const names = new Set();
+                
+                while (names.size < count) {
+                    const name = thematic ? this.generateThematicName() : this.generateRandomName();
+                    names.add(name);
+                }
+                
+                return Array.from(names).sort();
+            }
+        }
+
+        const generator = new KillianNameGenerator();
+
+        function displayNames(names) {
+            const nameList = document.getElementById('nameList');
+            nameList.innerHTML = '';
+            
+            names.forEach(name => {
+                const div = document.createElement('div');
+                div.className = 'name-item';
+                div.textContent = name;
+                nameList.appendChild(div);
+            });
+        }
+
+        function getNameCount() {
+            const count = parseInt(document.getElementById('nameCount').value);
+            return Math.min(Math.max(count, 1), 100); // Begrenzt auf 1-100
+        }
+
+        function generateThematicNames() {
+            const names = generator.generateMultipleNames(getNameCount(), true);
+            displayNames(names);
+        }
+
+        function generateRandomNames() {
+            const names = generator.generateMultipleNames(getNameCount(), false);
+            displayNames(names);
+        }
+
+        // Initial Namen generieren
+        generateThematicNames();
+    </script>
+</body>
+</html>

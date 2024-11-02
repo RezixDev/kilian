@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Dein Killian des Tages</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 90%;
+        }
+
+        h1 {
+            color: #ff4b6e;
+            margin-bottom: 2rem;
+        }
+
+        #dailyName {
+            font-size: 2.5rem;
+            color: #333;
+            margin: 2rem 0;
+            padding: 1rem;
+            border: 2px solid #ff4b6e;
+            border-radius: 10px;
+            background: white;
+        }
+
+        .info {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 1rem;
+        }
+
+        button {
+            background: #ff4b6e;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            margin: 1rem;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎲 Dein Killian des Tages</h1>
+        <div id="dailyName">Wird geladen...</div>
+        <button onclick="generateNewName()">Neuer Name</button>
+        <div class="info">Der Name ändert sich täglich automatisch!</div>
+    </div>
+
+    <script>
+        const names = [
+            "Absinthillian", "Allerillian", "Alpillian", "Altbierillian", "Amaryllian",
+            "Ancillian", "Apfelschorlillian", "Apfelstrudelillian", "Apfelweinillian",
+            "Aquarillian", "Armadillian", "Aspergillian", "Axillian", "Bachillian",
+            "Bacillian", "Bazillian", "Bergillian", "Beryllian", "Biergartillian",
+            "Billian", "Bockbierillian", "Bratwurstillian", "Brazillian", "Brezelillian",
+            "Brillian", "Butterbrezillian", "Camillian", "Cantillian", "Caterpillian",
+            "Centillian", "Chillian", "Chinchillian", "Codicillian", "Corallian",
+            "Crocodillian", "Crystallian", "Crustacillian", "Cubicillian", "Currywurstillian",
+            "Daffodillian", "Dandilian", "Decillian", "Dillian", "Dirndlillian",
+            "Distillian", "Donauillian", "Dönerillian", "Drillian", "Dunkelillian",
+            "Duodecillian", "Eiderillian", "Eisweinillian", "Elbeillian", "Emsillian",
+            "Fillian", "Flotillian", "Frillian", "Fuldaillian", "Gillian",
+            "Gipfelillian", "Glühweinillian", "Gorillian", "Grillian", "Gulaschillian",
+            "Haveillian", "Hefeweizillian", "Hillian", "Idyllian", "Innillian",
+            "Instillian", "Isarillian", "Jagertillian", "Jillian", "Käsespätzlillian",
+            "Kartoffellian", "Kletterillian", "Knödellian", "Kölschillian", "Krillian",
+            "Lahnillian", "Leberwurstillian", "Lebkuchillian", "Lechtillian", "Lederhosillian",
+            "Lillian", "Magilian", "Mainillian", "Mandillian", "Mantillian",
+            "Marshmallian", "Maultaschillian", "Maxillian", "Medallian", "Metallian",
+            "Millian", "Millillian", "Moselillian", "Murgillian", "Myrtillian",
+            "Naheillian", "Neckarillian", "Nillian", "Nonillian", "Novemdecillian",
+            "Octillian", "Octodecillian", "Oderillian", "Oktoberfestillian", "Papillian",
+            "Parallian", "Peeneillian", "Penicillian", "Phillian", "Picadillian",
+            "Pillian", "Pilsillian", "Pislillian", "Pistillian", "Postillian",
+            "Pretzelillian", "Prillian", "Psyllian", "Pupillian", "Quadrillian",
+            "Quillian", "Quindecillian", "Quintillian", "Quattuordecillian", "Radlerillian",
+            "Reptillian", "Rheinillian", "Rillian", "Rottweillian", "Rotweinillian",
+            "Ruhrillian", "Saaleillian", "Sarsaparillian", "Sauerkrautillian", "Schinkillian",
+            "Schnapsillian", "Schneeillian", "Schnitzelillian", "Schorlelillian",
+            "Schwarzbierillian", "Scintillian", "Seenillian", "Semmelillian", "Septendecillian",
+            "Septillian", "Sexdecillian", "Sibyllian", "Sillian", "Skiillian",
+            "Skillian", "Spadillian", "Spätzlillian", "Spezillian", "Spillian",
+            "Spreeillian", "Strudellian", "Swillian", "Talillian", "Tequillian",
+            "Thrillian", "Tillian", "Tranquillian", "Tredecillian", "Trevillian",
+            "Trillian", "Twillian", "Undecillian", "Vanillian", "Vaudevillian",
+            "Vermillian", "Vexillian", "Vigintillian", "Villian", "Vintillian",
+            "Waldillian", "Wanderillian", "Wartheillian", "Weißbierillian", "Weißweinillian",
+            "Weißwurstillian", "Werraillian", "Weserillian", "Wiesillian", "Willian",
+            "Wrillian", "Wurstillian", "Yoctillian", "Zeptillian", "Zillian"
+        ];
+
+        function getDailyName() {
+            // Erstelle einen Seed basierend auf dem aktuellen Datum
+            const today = new Date();
+            const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+            
+            // Verwende den Seed für eine deterministische aber zufällig erscheinende Auswahl
+            const index = seed % names.length;
+            return names[index];
+        }
+
+        function generateNewName() {
+            const randomIndex = Math.floor(Math.random() * names.length);
+            document.getElementById('dailyName').textContent = names[randomIndex];
+        }
+
+        // Initialisiere mit dem täglichen Namen
+        document.getElementById('dailyName').textContent = getDailyName();
+    </script>
+</body>
+</html>

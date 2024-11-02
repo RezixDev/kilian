@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Herzlichen Glückwunsch zum Geburtstag!</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            color: #333;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 800px;
+            padding: 2rem;
+            margin-top: 2rem;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: #ff4b6e;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .birthday-message {
+            font-size: 1.5rem;
+            margin: 2rem 0;
+            line-height: 1.6;
+        }
+
+        .photo-container {
+            max-width: 400px;
+            height: 300px;
+            margin: 2rem auto;
+            border: 3px solid #ff4b6e;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .photo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .music-controls {
+            margin: 1rem 0;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+        }
+
+        button {
+            background: #ff4b6e;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            margin: 0.5rem;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        .name-variations {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            margin-top: 2rem;
+            text-align: left;
+        }
+
+        .name-variations div {
+            padding: 5px;
+        }
+
+        .name-link {
+            color: #ff4b6e;
+            text-decoration: none;
+        }
+
+        .name-link:hover {
+            text-decoration: underline;
+        }
+
+        .nav-menu {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: #ff4b6e;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background: #ff4b6e;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .nav-link.active {
+            background: #ff4b6e;
+            color: white;
+        }
+
+        /* Container für den Hauptinhalt */
+        .content {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav-menu">
+        <div class="nav-container">
+            <a href="kilian-des-tages.html" class="nav-link">Killian des Tages</a>
+            <a href="kilian-generator.html" class="nav-link">Namen Generator</a>
+        </div>
+    </nav>
+    <div class="container">
+        <h1>🎉 Alles Gute zum Geburtstag <a href="#variations" class="name-link">Killian</a>! 🎂</h1>
+        <div class="music-controls">
+            <button onclick="playBirthdaySong()">🎵 Musik Abspielen</button>
+            <button onclick="stopBirthdaySong()">⏹️ Stop</button>
+        </div>
+        <div class="birthday-message">
+            Wenig Bugs 🐞,
+            wenig Technik-Fehler 💻,
+            viel lecker Bierchen 🍺,
+            viel gutes Essen 🍕,
+            viel gute Musik 🎵,
+            und alles andere was du dir noch wünchst 🎉
+        </div>
+
+        <div class="photo-container">
+            <img src="hi.png"Geburtstagsfoto">
+        </div>
+
+        <div id="variations" class="name-variations">
+            <div>Absinthillian</div>
+            <div>Allerillian</div>
+            <div>Alpillian</div>
+            <div>Altbierillian</div>
+            <div>Amaryllian</div>
+            <div>Ancillian</div>
+            <div>Apfelschorlillian</div>
+            <div>Apfelstrudelillian</div>
+            <div>Apfelweinillian</div>
+            <div>Aquarillian</div>
+            <div>Armadillian</div>
+            <div>Aspergillian</div>
+            <div>Axillian</div>
+            <div>Bachillian</div>
+            <div>Bacillian</div>
+            <div>Bazillian</div>
+            <div>Bergillian</div>
+            <div>Beryllian</div>
+            <div>Biergartillian</div>
+            <div>Billian</div>
+            <div>Bockbierillian</div>
+            <div>Bratwurstillian</div>
+            <div>Brazillian</div>
+            <div>Brezelillian</div>
+            <div>Brillian</div>
+            <div>Butterbrezillian</div>
+            <div>Camillian</div>
+            <div>Cantillian</div>
+            <div>Caterpillian</div>
+            <div>Centillian</div>
+            <div>Chillian</div>
+            <div>Chinchillian</div>
+            <div>Codicillian</div>
+            <div>Corallian</div>
+            <div>Crocodillian</div>
+            <div>Crystallian</div>
+            <div>Crustacillian</div>
+            <div>Cubicillian</div>
+            <div>Currywurstillian</div>
+            <div>Daffodillian</div>
+            <div>Dandilian</div>
+            <div>Decillian</div>
+            <div>Dillian</div>
+            <div>Dirndlillian</div>
+            <div>Distillian</div>
+            <div>Donauillian</div>
+            <div>Dönerillian</div>
+            <div>Drillian</div>
+            <div>Dunkelillian</div>
+            <div>Duodecillian</div>
+            <div>Eiderillian</div>
+            <div>Eisweinillian</div>
+            <div>Elbeillian</div>
+            <div>Emsillian</div>
+            <div>Fillian</div>
+            <div>Flotillian</div>
+            <div>Frillian</div>
+            <div>Fuldaillian</div>
+            <div>Gillian</div>
+            <div>Gipfelillian</div>
+            <div>Glühweinillian</div>
+            <div>Gorillian</div>
+            <div>Grillian</div>
+            <div>Gulaschillian</div>
+            <div>Haveillian</div>
+            <div>Hefeweizillian</div>
+            <div>Hillian</div>
+            <div>Idyllian</div>
+            <div>Innillian</div>
+            <div>Instillian</div>
+            <div>Isarillian</div>
+            <div>Jagertillian</div>
+            <div>Jillian</div>
+            <div>Käsespätzlillian</div>
+            <div>Kartoffellian</div>
+            <div>Kletterillian</div>
+            <div>Knödellian</div>
+            <div>Kölschillian</div>
+            <div>Krillian</div>
+            <div>Lahnillian</div>
+            <div>Leberwurstillian</div>
+            <div>Lebkuchillian</div>
+            <div>Lechtillian</div>
+            <div>Lederhosillian</div>
+            <div>Lillian</div>
+            <div>Magilian</div>
+            <div>Mainillian</div>
+            <div>Mandillian</div>
+            <div>Mantillian</div>
+            <div>Marshmallian</div>
+            <div>Maultaschillian</div>
+            <div>Maxillian</div>
+            <div>Medallian</div>
+            <div>Metallian</div>
+            <div>Millian</div>
+            <div>Millillian</div>
+            <div>Moselillian</div>
+            <div>Murgillian</div>
+            <div>Myrtillian</div>
+            <div>Naheillian</div>
+            <div>Neckarillian</div>
+            <div>Nillian</div>
+            <div>Nonillian</div>
+            <div>Novemdecillian</div>
+            <div>Octillian</div>
+            <div>Octodecillian</div>
+            <div>Oderillian</div>
+            <div>Oktoberfestillian</div>
+            <div>Papillian</div>
+            <div>Parallian</div>
+            <div>Peeneillian</div>
+            <div>Penicillian</div>
+            <div>Phillian</div>
+            <div>Picadillian</div>
+            <div>Pillian</div>
+            <div>Pilsillian</div>
+            <div>Pislillian</div>
+            <div>Pistillian</div>
+            <div>Postillian</div>
+            <div>Pretzelillian</div>
+            <div>Prillian</div>
+            <div>Psyllian</div>
+            <div>Pupillian</div>
+            <div>Quadrillian</div>
+            <div>Quillian</div>
+            <div>Quindecillian</div>
+            <div>Quintillian</div>
+            <div>Quattuordecillian</div>
+            <div>Radlerillian</div>
+            <div>Reptillian</div>
+            <div>Rheinillian</div>
+            <div>Rillian</div>
+            <div>Rottweillian</div>
+            <div>Rotweinillian</div>
+            <div>Ruhrillian</div>
+            <div>Saaleillian</div>
+            <div>Sarsaparillian</div>
+            <div>Sauerkrautillian</div>
+            <div>Schinkillian</div>
+            <div>Schnapsillian</div>
+            <div>Schneeillian</div>
+            <div>Schnitzelillian</div>
+            <div>Schorlelillian</div>
+            <div>Schwarzbierillian</div>
+            <div>Scintillian</div>
+            <div>Seenillian</div>
+            <div>Semmelillian</div>
+            <div>Septendecillian</div>
+            <div>Septillian</div>
+            <div>Sexdecillian</div>
+            <div>Sibyllian</div>
+            <div>Sillian</div>
+            <div>Skiillian</div>
+            <div>Skillian</div>
+            <div>Spadillian</div>
+            <div>Spätzlillian</div>
+            <div>Spezillian</div>
+            <div>Spillian</div>
+            <div>Spreeillian</div>
+            <div>Strudellian</div>
+            <div>Swillian</div>
+            <div>Talillian</div>
+            <div>Tequillian</div>
+            <div>Thrillian</div>
+            <div>Tillian</div>
+            <div>Tranquillian</div>
+            <div>Tredecillian</div>
+            <div>Trevillian</div>
+            <div>Trillian</div>
+            <div>Twillian</div>
+            <div>Undecillian</div>
+            <div>Vanillian</div>
+            <div>Vaudevillian</div>
+            <div>Vermillian</div>
+            <div>Vexillian</div>
+            <div>Vigintillian</div>
+            <div>Villian</div>
+            <div>Vintillian</div>
+            <div>Waldillian</div>
+            <div>Wanderillian</div>
+            <div>Wartheillian</div>
+            <div>Weißbierillian</div>
+            <div>Weißweinillian</div>
+            <div>Weißwurstillian</div>
+            <div>Werraillian</div>
+            <div>Weserillian</div>
+            <div>Wiesillian</div>
+            <div>Willian</div>
+            <div>Wrillian</div>
+            <div>Wurstillian</div>
+            <div>Yoctillian</div>
+            <div>Zeptillian</div>
+            <div>Zillian</div>
+        </div>
+    </div>
+
+    <script>
+        const notes = [
+            'C4', 'C4', 'D4', 'C4', 'F4', 'E4',
+            'C4', 'C4', 'D4', 'C4', 'G4', 'F4',
+            'C4', 'C4', 'C5', 'A4', 'F4', 'E4', 'D4',
+            'Bb4', 'Bb4', 'A4', 'F4', 'G4', 'F4'
+        ];
+
+        const durations = [
+            '8n', '8n', '4n', '4n', '4n', '2n',
+            '8n', '8n', '4n', '4n', '4n', '2n',
+            '8n', '8n', '4n', '4n', '4n', '4n', '4n',
+            '8n', '8n', '4n', '4n', '4n', '2n'
+        ];
+
+        const synth = new Tone.Synth({
+            oscillator: { type: 'sine' },
+            envelope: {
+                attack: 0.03,
+                decay: 0.1,
+                sustain: 0.3,
+                release: 1
+            }
+        }).toDestination();
+
+        const reverb = new Tone.Reverb({
+            decay: 2,
+            wet: 0.3
+        }).toDestination();
+
+        synth.connect(reverb);
+
+let isPlaying = false;
+let currentNoteIndex = 0;
+let nextNoteTime = 0;
+
+async function playBirthdaySong() {
+    if (isPlaying) return;
+    
+    await Tone.start();
+    isPlaying = true;
+    currentNoteIndex = 0;
+    
+    Tone.Transport.start();
+    
+    function scheduleNote() {
+        if (!isPlaying) return;
+        if (currentNoteIndex >= notes.length) {
+            isPlaying = false;
+            Tone.Transport.stop();
+            return;
+        }
+
+        const note = notes[currentNoteIndex];
+        const duration = durations[currentNoteIndex];
+        
+        synth.triggerAttackRelease(note, duration);
+        
+        currentNoteIndex++;
+        if (currentNoteIndex < notes.length) {
+            setTimeout(scheduleNote, Tone.Time(duration).toMilliseconds() * 1.1);
+        }
+    }
+
+    scheduleNote();
+}
+
+function stopBirthdaySong() {
+    isPlaying = false;
+    Tone.Transport.stop();
+    synth.triggerRelease();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+            const currentPage = window.location.pathname;
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                if (currentPage.includes(link.getAttribute('href'))) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+// Smooth scrolling für den Namen-Link
+document.querySelector('.name-link').addEventListener('click', function(e) {
+    e.preventDefault();
+    const targetId = this.getAttribute('href').slice(1);
+    document.getElementById(targetId).scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+    });
+});
+</script>
+</body>
+</html>
