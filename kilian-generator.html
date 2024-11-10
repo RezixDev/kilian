@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
-    <title>Killian Namen Generator</title>
+    <title>Kilian Namen Generator</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -87,10 +88,11 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
-        <h1>🎲 Killian Namen Generator</h1>
-        
+        <h1>🎲 Kilian Namen Generator</h1>
+
         <div class="controls">
             <input type="number" id="nameCount" value="10" min="1" max="100">
             <button onclick="generateThematicNames()">Thematische Namen</button>
@@ -105,102 +107,102 @@
     </div>
 
     <script>
-        class KillianNameGenerator {
+        class KilianNameGenerator {
             constructor() {
                 this.germanFood = [
-        'Bratwurst', 'Currywurst', 'Döner', 'Schnitzel', 'Sauerkraut', 
-        'Brezel', 'Knödel', 'Spätzle', 'Maultasche', 'Leberkäs',
-        'Weißwurst', 'Leberwurst', 'Blutwurst', 'Mettwurst', 'Bockwurst',
-        'Kartoffel', 'Semmel', 'Bretzel', 'Gugelhupf', 'Strudel',
-        'Kaiserschmarrn', 'Dampfnudel', 'Reiberdatschi', 'Labskaus', 'Grünkohl',
-        'Eintopf', 'Rouladen', 'Sauerbraten', 'Kassler', 'Hackbraten',
-        'Marzipan', 'Lebkuchen', 'Pumpernickel', 'Krapfen', 'Berliner',
-        'Frikadelle', 'Kasseler', 'Käsekuchen', 'Pfannkuchen', 'Schweinebraten',
-        'Spargel', 'Sülze', 'Tafelspitz', 'Wienerschnitzel', 'Germknödel',
-        'Eierkuchen', 'Quarkkeulchen', 'Dibbelabbes', 'Handkäs', 'Zwiebelkuchen'
-    ];
-    
-    this.germanDrinks = [
-        'Bier', 'Weißbier', 'Radler', 'Schorle', 'Glühwein',
-        'Apfelwein', 'Weinschorle', 'Spezi', 'Kölsch', 'Pils',
-        'Altbier', 'Hefeweizen', 'Dunkel', 'Maibock', 'Märzen',
-        'Kristallweizen', 'Berliner Weiße', 'Gose', 'Export', 'Schwarzbier',
-        'Doppelbock', 'Eisbock', 'Rauchbier', 'Kellerbier', 'Zwickel',
-        'Kirschsaft', 'Johannisbeerschorle', 'Malzbier', 'Fassbrause', 'Alster',
-        'Federweißer', 'Riesling', 'Spätburgunder', 'Dornfelder', 'Müller-Thurgau',
-        'Schnaps', 'Korn', 'Obstler', 'Jägermeister', 'Underberg',
-        'Kräuterlikör', 'Berliner Luft', 'Kirschwasser', 'Williams', 'Himbeergeist',
-        'Holunderlikör', 'Saftsecco', 'Bowle', 'Punsch', 'Rumtopf'
-    ];
-    
-    this.nature = [
-        'Berg', 'Tal', 'Wald', 'Wiese', 'See', 'Bach', 'Fluss', 'Gipfel',
-        'Moor', 'Heide', 'Düne', 'Strand', 'Klippe', 'Fjord', 'Gletscher',
-        'Höhle', 'Schlucht', 'Vulkan', 'Steppe', 'Tundra',
-        'Watt', 'Riff', 'Delta', 'Lagune', 'Bucht',
-        'Quelle', 'Wasserfall', 'Stromschnelle', 'Sandbank', 'Insel',
-        'Gebirge', 'Hügel', 'Plateau', 'Ebene', 'Tief',
-        'Fjäll', 'Alm', 'Aue', 'Marsch', 'Geest',
-        'Förde', 'Bodden', 'Haff', 'Sund', 'Becken',
-        'Trog', 'Kar', 'Grat', 'Kamm', 'Hang'
-    ];
-    
-    this.consonants = 'bcdfghjklmnpqrstvwxz'.split('');
-    this.vowels = 'aeiou'.split('');
-    
-    this.prefixes = [
-        'Tr', 'Br', 'Cr', 'Dr', 'Fr', 'Gr', 'Pr', 'Str', 'Spr', 'Schr',
-        'Bl', 'Cl', 'Fl', 'Gl', 'Kl', 'Pl', 'Sl', 'Thr', 'Schl', 'Schw',
-        'Zw', 'Qu', 'Pf', 'Kr', 'Kn', 'Gn', 'Sk', 'Sm', 'Sn', 'Sp',
-        'St', 'Sw', 'Tr', 'Tw', 'Wr', 'Wh', 'Ph', 'Th', 'Ch', 'Rh',
-        'Schn', 'Schm', 'Schw', 'Pfl', 'Spl', 'Spr', 'Str', 'Skr', 'Sph', 'Zw'
-    ];
+                    'Bratwurst', 'Currywurst', 'Döner', 'Schnitzel', 'Sauerkraut',
+                    'Brezel', 'Knödel', 'Spätzle', 'Maultasche', 'Leberkäs',
+                    'Weißwurst', 'Leberwurst', 'Blutwurst', 'Mettwurst', 'Bockwurst',
+                    'Kartoffel', 'Semmel', 'Bretzel', 'Gugelhupf', 'Strudel',
+                    'Kaiserschmarrn', 'Dampfnudel', 'Reiberdatschi', 'Labskaus', 'Grünkohl',
+                    'Eintopf', 'Rouladen', 'Sauerbraten', 'Kassler', 'Hackbraten',
+                    'Marzipan', 'Lebkuchen', 'Pumpernickel', 'Krapfen', 'Berliner',
+                    'Frikadelle', 'Kasseler', 'Käsekuchen', 'Pfannkuchen', 'Schweinebraten',
+                    'Spargel', 'Sülze', 'Tafelspitz', 'Wienerschnitzel', 'Germknödel',
+                    'Eierkuchen', 'Quarkkeulchen', 'Dibbelabbes', 'Handkäs', 'Zwiebelkuchen'
+                ];
+
+                this.germanDrinks = [
+                    'Bier', 'Weißbier', 'Radler', 'Schorle', 'Glühwein',
+                    'Apfelwein', 'Weinschorle', 'Spezi', 'Kölsch', 'Pils',
+                    'Altbier', 'Hefeweizen', 'Dunkel', 'Maibock', 'Märzen',
+                    'Kristallweizen', 'Berliner Weiße', 'Gose', 'Export', 'Schwarzbier',
+                    'Doppelbock', 'Eisbock', 'Rauchbier', 'Kellerbier', 'Zwickel',
+                    'Kirschsaft', 'Johannisbeerschorle', 'Malzbier', 'Fassbrause', 'Alster',
+                    'Federweißer', 'Riesling', 'Spätburgunder', 'Dornfelder', 'Müller-Thurgau',
+                    'Schnaps', 'Korn', 'Obstler', 'Jägermeister', 'Underberg',
+                    'Kräuterlikör', 'Berliner Luft', 'Kirschwasser', 'Williams', 'Himbeergeist',
+                    'Holunderlikör', 'Saftsecco', 'Bowle', 'Punsch', 'Rumtopf'
+                ];
+
+                this.nature = [
+                    'Berg', 'Tal', 'Wald', 'Wiese', 'See', 'Bach', 'Fluss', 'Gipfel',
+                    'Moor', 'Heide', 'Düne', 'Strand', 'Klippe', 'Fjord', 'Gletscher',
+                    'Höhle', 'Schlucht', 'Vulkan', 'Steppe', 'Tundra',
+                    'Watt', 'Riff', 'Delta', 'Lagune', 'Bucht',
+                    'Quelle', 'Wasserfall', 'Stromschnelle', 'Sandbank', 'Insel',
+                    'Gebirge', 'Hügel', 'Plateau', 'Ebene', 'Tief',
+                    'Fjäll', 'Alm', 'Aue', 'Marsch', 'Geest',
+                    'Förde', 'Bodden', 'Haff', 'Sund', 'Becken',
+                    'Trog', 'Kar', 'Grat', 'Kamm', 'Hang'
+                ];
+
+                this.consonants = 'bcdfghjklmnpqrstvwxz'.split('');
+                this.vowels = 'aeiou'.split('');
+
+                this.prefixes = [
+                    'Tr', 'Br', 'Cr', 'Dr', 'Fr', 'Gr', 'Pr', 'Str', 'Spr', 'Schr',
+                    'Bl', 'Cl', 'Fl', 'Gl', 'Kl', 'Pl', 'Sl', 'Thr', 'Schl', 'Schw',
+                    'Zw', 'Qu', 'Pf', 'Kr', 'Kn', 'Gn', 'Sk', 'Sm', 'Sn', 'Sp',
+                    'St', 'Sw', 'Tr', 'Tw', 'Wr', 'Wh', 'Ph', 'Th', 'Ch', 'Rh',
+                    'Schn', 'Schm', 'Schw', 'Pfl', 'Spl', 'Spr', 'Str', 'Skr', 'Sph', 'Zw'
+                ];
             }
 
             generateThematicName() {
                 const allThemes = [...this.germanFood, ...this.germanDrinks, ...this.nature];
                 const randomTheme = allThemes[Math.floor(Math.random() * allThemes.length)];
-                return randomTheme + 'illian';
+                return randomTheme + 'ilian';
             }
 
             generateRandomName() {
                 const length = Math.floor(Math.random() * 2) + 1;
                 let name = '';
-                
+
                 const prefix = this.prefixes[Math.floor(Math.random() * this.prefixes.length)];
                 name = prefix;
-                
+
                 for (let i = 0; i < length; i++) {
                     const vowel = this.vowels[Math.floor(Math.random() * this.vowels.length)];
                     name += vowel;
-                    
+
                     if (Math.random() > 0.5) {
                         const consonant = this.consonants[Math.floor(Math.random() * this.consonants.length)];
                         name += consonant;
                     }
                 }
-                
-                return name + 'illian';
+
+                return name + 'ilian';
             }
 
             generateMultipleNames(count, thematic = false) {
                 const names = new Set();
-                
+
                 while (names.size < count) {
                     const name = thematic ? this.generateThematicName() : this.generateRandomName();
                     names.add(name);
                 }
-                
+
                 return Array.from(names).sort();
             }
         }
 
-        const generator = new KillianNameGenerator();
+        const generator = new KilianNameGenerator();
 
         function displayNames(names) {
             const nameList = document.getElementById('nameList');
             nameList.innerHTML = '';
-            
+
             names.forEach(name => {
                 const div = document.createElement('div');
                 div.className = 'name-item';
@@ -228,4 +230,5 @@
         generateThematicNames();
     </script>
 </body>
+
 </html>

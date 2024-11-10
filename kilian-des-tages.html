@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
-    <title>Dein Killian des Tages</title>
+    <title>Dein Kilian des Tages</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -62,9 +63,10 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
-        <h1>🎲 Dein Killian des Tages</h1>
+        <h1>🎲 Dein Kilian des Tages</h1>
         <div id="dailyName">Wird geladen...</div>
         <button onclick="generateNewName()">Neuer Name</button>
         <div class="info">Der Name ändert sich täglich automatisch!</div>
@@ -72,52 +74,52 @@
 
     <script>
         const names = [
-            "Absinthillian", "Allerillian", "Alpillian", "Altbierillian", "Amaryllian",
-            "Ancillian", "Apfelschorlillian", "Apfelstrudelillian", "Apfelweinillian",
-            "Aquarillian", "Armadillian", "Aspergillian", "Axillian", "Bachillian",
-            "Bacillian", "Bazillian", "Bergillian", "Beryllian", "Biergartillian",
-            "Billian", "Bockbierillian", "Bratwurstillian", "Brazillian", "Brezelillian",
-            "Brillian", "Butterbrezillian", "Camillian", "Cantillian", "Caterpillian",
-            "Centillian", "Chillian", "Chinchillian", "Codicillian", "Corallian",
-            "Crocodillian", "Crystallian", "Crustacillian", "Cubicillian", "Currywurstillian",
-            "Daffodillian", "Dandilian", "Decillian", "Dillian", "Dirndlillian",
-            "Distillian", "Donauillian", "Dönerillian", "Drillian", "Dunkelillian",
-            "Duodecillian", "Eiderillian", "Eisweinillian", "Elbeillian", "Emsillian",
-            "Fillian", "Flotillian", "Frillian", "Fuldaillian", "Gillian",
-            "Gipfelillian", "Glühweinillian", "Gorillian", "Grillian", "Gulaschillian",
-            "Haveillian", "Hefeweizillian", "Hillian", "Idyllian", "Innillian",
-            "Instillian", "Isarillian", "Jagertillian", "Jillian", "Käsespätzlillian",
-            "Kartoffellian", "Kletterillian", "Knödellian", "Kölschillian", "Krillian",
-            "Lahnillian", "Leberwurstillian", "Lebkuchillian", "Lechtillian", "Lederhosillian",
-            "Lillian", "Magilian", "Mainillian", "Mandillian", "Mantillian",
-            "Marshmallian", "Maultaschillian", "Maxillian", "Medallian", "Metallian",
-            "Millian", "Millillian", "Moselillian", "Murgillian", "Myrtillian",
-            "Naheillian", "Neckarillian", "Nillian", "Nonillian", "Novemdecillian",
-            "Octillian", "Octodecillian", "Oderillian", "Oktoberfestillian", "Papillian",
-            "Parallian", "Peeneillian", "Penicillian", "Phillian", "Picadillian",
-            "Pillian", "Pilsillian", "Pislillian", "Pistillian", "Postillian",
-            "Pretzelillian", "Prillian", "Psyllian", "Pupillian", "Quadrillian",
-            "Quillian", "Quindecillian", "Quintillian", "Quattuordecillian", "Radlerillian",
-            "Reptillian", "Rheinillian", "Rillian", "Rottweillian", "Rotweinillian",
-            "Ruhrillian", "Saaleillian", "Sarsaparillian", "Sauerkrautillian", "Schinkillian",
-            "Schnapsillian", "Schneeillian", "Schnitzelillian", "Schorlelillian",
-            "Schwarzbierillian", "Scintillian", "Seenillian", "Semmelillian", "Septendecillian",
-            "Septillian", "Sexdecillian", "Sibyllian", "Sillian", "Skiillian",
-            "Skillian", "Spadillian", "Spätzlillian", "Spezillian", "Spillian",
-            "Spreeillian", "Strudellian", "Swillian", "Talillian", "Tequillian",
-            "Thrillian", "Tillian", "Tranquillian", "Tredecillian", "Trevillian",
-            "Trillian", "Twillian", "Undecillian", "Vanillian", "Vaudevillian",
-            "Vermillian", "Vexillian", "Vigintillian", "Villian", "Vintillian",
-            "Waldillian", "Wanderillian", "Wartheillian", "Weißbierillian", "Weißweinillian",
-            "Weißwurstillian", "Werraillian", "Weserillian", "Wiesillian", "Willian",
-            "Wrillian", "Wurstillian", "Yoctillian", "Zeptillian", "Zillian"
+            "Absinthilian", "Allerilian", "Alpilian", "Altbierilian", "Amaryilian",
+            "Ancilian", "Apfelschorlilian", "Apfelstrudelilian", "Apfelweinilian",
+            "Aquarilian", "Armadilian", "Aspergilian", "Axilian", "Bachilian",
+            "Bacilian", "Bazilian", "Bergilian", "Beryilian", "Biergartilian",
+            "Bilian", "Bockbierilian", "Bratwurstilian", "Brazilian", "Brezelilian",
+            "Brilian", "Butterbrezilian", "Camilian", "Cantilian", "Caterpilian",
+            "Centilian", "Chilian", "Chinchilian", "Codicilian", "Corailian",
+            "Crocodilian", "Crystailian", "Crustacilian", "Cubicilian", "Currywurstilian",
+            "Daffodilian", "Dandilian", "Decilian", "Dilian", "Dirndlilian",
+            "Distilian", "Donauilian", "Dönerilian", "Drilian", "Dunkelilian",
+            "Duodecilian", "Eiderilian", "Eisweinilian", "Elbeilian", "Emsilian",
+            "Filian", "Flotilian", "Frilian", "Fuldailian", "Gilian",
+            "Gipfelilian", "Glühweinilian", "Gorilian", "Grilian", "Gulaschilian",
+            "Haveilian", "Hefeweizilian", "Hilian", "Idyilian", "Innilian",
+            "Instilian", "Isarilian", "Jagertilian", "Jilian", "Käsespätzlilian",
+            "Kartoffeilian", "Kletterilian", "Knödeilian", "Kölschilian", "Krilian",
+            "Lahnilian", "Leberwurstilian", "Lebkuchilian", "Lechtilian", "Lederhosilian",
+            "Lilian", "Magilian", "Mainilian", "Mandilian", "Mantilian",
+            "Marshmailian", "Maultaschilian", "Maxilian", "Medailian", "Metailian",
+            "Milian", "Millilian", "Moselilian", "Murgilian", "Myrtilian",
+            "Naheilian", "Neckarilian", "Nilian", "Nonilian", "Novemdecilian",
+            "Octilian", "Octodecilian", "Oderilian", "Oktoberfestilian", "Papilian",
+            "Parailian", "Peeneilian", "Penicilian", "Philian", "Picadilian",
+            "Pilian", "Pilsilian", "Pislilian", "Pistilian", "Postilian",
+            "Pretzelilian", "Prilian", "Psyilian", "Pupilian", "Quadrilian",
+            "Quilian", "Quindecilian", "Quintilian", "Quattuordecilian", "Radlerilian",
+            "Reptilian", "Rheinilian", "Rilian", "Rottweilian", "Rotweinilian",
+            "Ruhrilian", "Saaleilian", "Sarsaparilian", "Sauerkrautilian", "Schinkilian",
+            "Schnapsilian", "Schneeilian", "Schnitzelilian", "Schorlelilian",
+            "Schwarzbierilian", "Scintilian", "Seenilian", "Semmelilian", "Septendecilian",
+            "Septilian", "Sexdecilian", "Sibyilian", "Silian", "Skiilian",
+            "Skilian", "Spadilian", "Spätzlilian", "Spezilian", "Spilian",
+            "Spreeilian", "Strudeilian", "Swilian", "Talilian", "Tequilian",
+            "Thrilian", "Tilian", "Tranquilian", "Tredecilian", "Trevilian",
+            "Trilian", "Twilian", "Undecilian", "Vanilian", "Vaudevilian",
+            "Vermilian", "Vexilian", "Vigintilian", "Vilian", "Vintilian",
+            "Waldilian", "Wanderilian", "Wartheilian", "Weißbierilian", "Weißweinilian",
+            "Weißwurstilian", "Werrailian", "Weserilian", "Wiesilian", "Wilian",
+            "Wrilian", "Wurstilian", "Yoctilian", "Zeptilian", "Zilian"
         ];
 
         function getDailyName() {
             // Erstelle einen Seed basierend auf dem aktuellen Datum
             const today = new Date();
             const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
-            
+
             // Verwende den Seed für eine deterministische aber zufällig erscheinende Auswahl
             const index = seed % names.length;
             return names[index];
@@ -132,4 +134,5 @@
         document.getElementById('dailyName').textContent = getDailyName();
     </script>
 </body>
+
 </html>
